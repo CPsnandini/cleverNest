@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stressbuster Chatbox</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Chatbox Icon Styles */
+        #chatbox-icon {
+            position: fixed;
+            bottom: 50px;
+            left: 50px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%; /* Ensures circular shape */
+            background-color: #F4A261;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Ensures the image fits the circular boundary */
+            z-index: 1000;
+        }
+
+        #chatbox-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Full-Screen Chatbox Popup Styles */
+        #chatbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4158D0, #C850C0, #FFCC70);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+            color: white;
+        }
+
+        #chatbox-header {
+            background-color: #2E2C76;
+            padding: 15px;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chatbox-header button {
+            background: none;
+            border: none;
+            color: rgb(246, 243, 243);
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        #chatbox-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100% - 60px); /* Adjust for header height */
+            text-align: center;
+            padding: 20px;
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #C850C0;
+            color: rgb(18, 18, 18);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight:bold;
+        }
+
+        button:hover {
+            background-color: #9E379F;
+        }
+
+        /* Activity and Timer Display */
+        #activity {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(23, 23, 23);
+        }
+
+        #timer {
+            color: black;
+            margin-top: 10px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chatbox Icon -->
+    <div id="chatbox-icon" onclick="toggleChatbox()">
+        <img src="llogo.png" alt="Chat Icon"> <!-- Replace with your icon -->
+    </div>
+
+    <!-- Full-Screen Chatbox Popup -->
+    <div id="chatbox">
+        <div id="chatbox-header">
+            <span>Stressbuster Chatbox</span>
+            <button onclick="toggleChatbox()">X</button>
+        </div>
+        <div id="chatbox-content">
+            <button onclick="startBreathing()">Breathing Exercise</button>
+            <button onclick="startFocus()">Focusing Exercise</button>
+            <div id="activity" class="hidden"></div>
+            <div id="timer" class="hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        let timerInterval;
+        let remainingTime;
+        let breathingSteps = [
+            "Inhale deeply...",
+            "Hold your breath...",
+            "Exhale slowly...",
+            "Pause before the next breath..."
+        ];
+        let currentStep = 0;
+
+        // Function to get URL query parameters
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Automatically start the exercise based on the `start` parameter
+document.addEventListener("DOMContentLoaded", () => {
+    const startOption = getQueryParam('start');
+    if (startOption === 'breathing') {
+        startBreathing();
+    } else if (startOption === 'focusing') {
+        startFocus();
+    }
+});
+
+    
+        // Toggles the visibility of the chatbox
+        function toggleChatbox() {
+            const chatbox = document.getElementById('chatbox');
+            chatbox.style.display = chatbox.style.display === 'none' || !chatbox.style.display ? 'block' : 'none';
+            if (chatbox.style.display === 'none') clearInterval(timerInterval); // Stop timer if closed
+        }
+    
+        // Starts the Breathing Exercise
+        function startBreathing() {
+            const activity = document.getElementById('activity');
+            activity.innerHTML = `<p id="breathing-step" style="font-size: 24px; font-weight: bold;">${breathingSteps[currentStep]}</p>
+                                  <button onclick="closePopup()">Close</button>`;
+    
+            activity.classList.remove('hidden');
+            startBreathingTimer(30);
+        }
+    
+        function startBreathingTimer(duration) {
+            const timer = document.getElementById('timer');
+            timer.textContent = `Time left: ${duration} seconds`;
+            timer.classList.remove('hidden');
+            remainingTime = duration;
+    
+            timerInterval = setInterval(() => {
+                remainingTime--;
+                timer.textContent = `Time left: ${remainingTime} seconds`;
+    
+                // Update breathing steps every few seconds
+                if (remainingTime % 7 === 0 && remainingTime > 0) {
+                    currentStep = (currentStep + 1) % breathingSteps.length;
+                    document.getElementById('breathing-step').textContent = breathingSteps[currentStep];
+                }
+    
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    timer.textContent = "Breathing exercise completed!";
+                }
+            }, 1000);
+        }
+    
+        // Starts the Focusing Exercise
+        function startFocus() {
+            const activity = document.getElementById('activity');
+            activity.innerHTML = `
+                <img src="dot.jpg" alt="Focus Dot" style="width:80px; height:80px;">
+                <p>Keep staring at the dot to increase your concentration.</p>
+                <button onclick="closePopup()">Close</button>
+            `;
+            activity.classList.remove('hidden');
+            startTimer(30, "Focusing exercise completed!");
+        }
+    
+        // Starts a countdown timer for the Focusing Exercise
+        function startTimer(duration, completionMessage) {
+            clearInterval(timerInterval);
+            remainingTime = duration;
+    
+            const timer = document.getElementById('timer');
+            timer.textContent = `Time left: ${remainingTime} seconds`;
+            timer.classList.remove('hidden');
+    
+            timerInterval = setInterval(() => {
+                remainingTime--;
+                timer.textContent = `Time left: ${remainingTime} seconds`;
+    
+                if (remainingTime <= 0) {
+                    clearInterval(timerInterval);
+                    timer.textContent = completionMessage;
+                }
+            }, 1000);
+        }
+    
+        // Closes the popup and resets the activity
+        function closePopup() {
+            const activity = document.getElementById('activity');
+            const timer = document.getElementById('timer');
+            activity.classList.add('hidden');
+            timer.classList.add('hidden');
+            clearInterval(timerInterval);
+        }
+    </script>
+    
+</body>
+</html>

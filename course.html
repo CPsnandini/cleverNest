@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clever Nest - Practice</title>
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #d0e7fc, #d7f6d7, #fdf0d4);
+  color: #333;
+}
+
+header {
+  background-color: #F3C2E3;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+nav ul li a:hover {
+  color: #000;
+}
+
+section.courses {
+  padding-left: 90px;
+  padding-top: 50px;
+  padding-right: 90px;
+}
+
+section.courses h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.course {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.course-info {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+.course-info h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.course-info p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #F3C2E3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e28fbb;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #F3C2E3;
+}
+
+footer p {
+  font-size: 14px;
+  color: #333;
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">CLEVER NEST</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Practice</a></li>
+        <li><a href="#">Leaderboard</a></li>
+        <li><a href="badge.html">Badges</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section class="courses">
+    <h2>Courses:</h2>
+    <div class="course">
+      <img src="algebra.png" alt="Linear Algebra">
+      <div class="course-info">
+        <h3>Linear Algebra</h3>
+        <p>Unlock the power of linear algebra to solve complex problems with ease and precision. From computer graphics to data science, mastering it opens doors to endless possibilities!</p>
+        <a href="algebra.html">
+        <button>Start</button>
+      </a>
+      </div>
+    </div>
+    <div class="course">
+      <img src="cj.jpg" alt="Coordinate Geometry">
+      <div class="course-info">
+        <h3>Coordinate Geometry</h3>
+        <p>Discover the magic of coordinate geometry, where algebra meets geometry to solve real-world problems. Unlock the secrets of shapes, distances, and equations for limitless applications in science and engineering!</p>
+        <button>Start</button>
+      </div>
+    </div>
+    <div class="course">
+      <img src="trig.jpg" alt="Trigonometry">
+      <div class="course-info">
+        <h3> Mastering Trigonometry</h3>
+        <p>Gain a solid foundation in trigonometric functions, identities, and applications in various fields like physics, engineering, and architecture.!</p>
+        <a href="trig.html">
+        <button>Start</button>
+      </a>
+      </div>
+    </div>
+      <div class="course">
+        <img src="statistics.jpg" alt="Trigonometry">
+        <div class="course-info">
+          <h3> Understanding Statistics and Data Interpretation</h3>
+          <p>Learn key concepts in statistics and probability, including distributions, hypothesis testing, and how to interpret data in scientific research.!</p>
+          
+          <button>Start</button>
+     
+      </div>
+    </div>
+
+    <div class="course">
+      <img src="green.jpg" alt="green-house">
+      <div class="course-info">
+        <h3>Green-house Effect</h3>
+        <p>Understanding how gases like carbon dioxide and methane trap heat in the Earth's atmosphereGain the knowledge about the science behind the greenhouse effect, its role in regulating Earth's climate, and its connection to global warming. Learn the causes,
+           consequences, and potential solutions to mitigate its impact.!</p>
+        <a href="green.html">
+        <button>Start</button>
+      </a>
+    </div>
+  </div>
+
+
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Clever Nest. All rights reserved.</p>
+  </footer>
+
+  <script>// Event listeners for the 'Start' buttons of each course
+    document.querySelectorAll('.course button').forEach(button => {
+      button.addEventListener('click', function () {
+        const courseName = this.parentElement.querySelector('h3').innerText;
+        alert(`You have started the ${courseName} course!`);
+        console.log(`Started the course: ${courseName}`);
+      });
+    });
+    </script>
+</body>
+</html>

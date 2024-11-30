@@ -1,0 +1,76 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to right, #d0e7fc, #90e290, #fdf0d4);
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  font-family: "Fredoka One", sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #0056b3;
+  text-align: center;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 50px;
+}
+#pattern-display {
+  font-size: 25px;
+  font-weight: bold; /* Make the text bold */
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+}
+#user-input {
+  font-size: 25px;
+  font-weight: bold; /* Make the text bold */
+  color: black;
+  text-align: center;
+  margin-top: 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2px;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+  margin: 20px auto;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.circle.active {
+  border: 3px solid black;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#feedback {
+  font-size: 30px;
+  margin-top: 30px;
+  font-weight: bold;
+}

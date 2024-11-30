@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+/* Chatbox Icon Styles */
+/* Chatbox Icon Styles */
+#chatbox-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Ensures circular shape */
+    background-color: #3fbae3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Ensures the image fits the circular boundary */
+    z-index: 1000;
+    margin-bottom: 50px;
+    margin-left: 80px;
+}
+
+#chatbox-icon img {
+    width: 100%; /* Ensures the image fills the container */
+    height: 100%; /* Ensures the image fills the container */
+    object-fit: cover; /* Ensures the image covers the circular space */
+    border-radius: 50%; /* Makes sure the image itself stays circular */
+}
+
+/* Activity Section for Focusing Dot */
+#activity img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover; /* Ensures the image completely fills the space */
+    border-radius: 50%; /* Makes the image appear circular */
+}
+
+
+/* Chatbox Popup Styles */
+#chatbox {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    width: 300px;
+    background-image:url('bgg.png');
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#chatbox-header {
+    background-color: #415b69;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatbox-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#chatbox-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #415b69;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #17465f;
+}
+
+/* Activity and Timer Display */
+#activity {
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+#timer {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+#b{
+    color: #333;
+    font-weight: bold;
+}

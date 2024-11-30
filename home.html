@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e0f7fa;
+}
+/* Add this after your body styles */
+body,
+main{
+  margin: 0; /* Removes any unintended space around the elements */
+  padding: 0; /* Removes extra padding */
+}
+.sections {
+  margin: 0; /* Removes any unintended space around the elements */
+  padding: 0; /* Removes extra padding */
+}
+
+header {
+   background: linear-gradient(to left, #e1cff4, #fbc7d9);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+nav ul li a:hover {
+  background-color: #333;
+}
+
+main {
+  flex-grow: 1;
+  margin-left: 220px;
+  text-align: center;
+  padding: 50px 20px;
+  transition: margin-left 0.3s;
+  .sections { 
+  display: flex;
+  justify-content: space-between; /* Ensures even spacing between columns */
+  align-items: flex-start; /* Aligns content to the top */
+  width: 100%; /* Makes the container take the full width */
+  max-width: 1200px; /* Optional: Restricts maximum width for large screens */
+  margin: 0 auto; /* Centers the container horizontally */
+  margin-left: 150px;
+  padding: 0; /* Removes extra padding */
+  gap: 20px; /* Adds consistent spacing between columns */
+  box-sizing: border-box; /* Ensures padding and borders are included in width calculation */
+}
+}
+
+.section {
+  flex: 1; /* Equal width for all columns */
+  margin: 0; /* Removes any extra margins */
+  max-width: 300px;
+  height: 400px; /* Optional: Limit column size */
+  text-align: center; /* Center content inside */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.section:hover {
+  background-color: #faf9f6;
+}
+
+.section img {
+  width: 50px;
+  height: 50px;
+}
+footer {
+  background: linear-gradient(to right, #d0e7fc, #d7f6d7, #fdf0d4);
+  padding: 20px;
+  text-align: center;
+}
+
+#about-us {
+  margin-top: 50px;
+}
+
+#about-us h2 {
+  color: #000;
+  margin-bottom: 10px;
+}
+
+#about-us p {
+  color: #333;
+  font-size: 16px;
+}
+
+button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: #333;
+}
+<!--stressbuster css-->
+
+ /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Chatbox Icon Styles */
+        #chatbox-icon {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%; /* Ensures circular shape */
+            background-color: #F4A261;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden; /* Ensures the image fits the circular boundary */
+            z-index: 1000;
+        }
+
+        #chatbox-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Full-Screen Chatbox Popup Styles */
+        #chatbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4158D0, #C850C0, #FFCC70);
+            display: none; /* Initially hidden */
+            z-index: 1000;
+            color: white;
+        }
+
+        #chatbox-header {
+            background-color: #2E2C76;
+            padding: 15px;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chatbox-header button {
+            background: none;
+            border: none;
+            color: rgb(246, 243, 243);
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        #chatbox-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100% - 60px); /* Adjust for header height */
+            text-align: center;
+            padding: 20px;
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #C850C0;
+            color: rgb(18, 18, 18);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight:bold;
+        }
+
+        button:hover {
+            background-color: #9E379F;
+        }
+
+        /* Activity and Timer Display */
+        #activity {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 20px;
+            color: rgb(23, 23, 23);
+        }
+
+        #timer {
+            color: black;
+            margin-top: 10px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+</style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="clevernest.jpg" alt="CleverNest Logo" />
+        <h1>CLEVER NEST</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="feedback.html">Teacher's feedback</a></li>
+          <li><a href="course.html">Practice</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>
+        Welcome to CleverNest, a niche for all learners. Embrace the way of new
+        learning!
+      </h2>
+      <div class="sections">
+        <div class="section">
+          <img src="practice.jpg" alt="Practice Icon" />
+          <h3>Train Your Brain</h3>
+          <p>
+            Unleash the full potential of your brain! Dive into exciting puzzles
+            and mind-bending challenges designed to sharpen your thinking and
+            keep your neurons firing.Get ready to boost your brainpower in the
+            most entertaining way!🧠⚡
+            <a href="final.html">
+                <img src="start.png" alt="click here to start" style="width: 80px; height: 80px;">
+            </a>
+          </p>
+        </div>
+        <div class="section">
+          <img src="quizzz.jpg" alt="Quizzes Icon" />
+          <h3>QUIZZES</h3>
+          <p>
+            Ready to challenge yourself ? Test your knowledge with our fun and
+            interactive quizzes. Track your progress, earn badges, and climb the
+            leaderboard.📈🌟
+            <a href="index.html">
+                <img src="start.png" alt="click here to start" style="width: 80px; height: 80px;">
+             </a>
+          </p>
+        </div>
+        <div class="section">
+          <img src="awards.jpg" alt="Leaderboard Icon" />
+          <h3>AWARDS</h3>
+          <p>
+            Celebrate your achievements with our exclusive awards and badges! As
+            you progress, earn unique badges that highlight your skills and
+            dedication. Display your accomplishments with pride and strive for
+            the ultimate recognition. Every badge tells a story of your learning
+            journey and motivates you to reach new heights!🏅🎉</p>
+             <a href="badge.html"> 
+                <img src="start.png" alt="click here to start" style="width: 80px; height: 80px;">
+            </a>
+          
+        </div>
+      </div>
+    </main>
+    <footer>
+      <section id="about-us">
+        <h2>About Us</h2>
+        <p>
+          At CleverNest, we are committed to fostering a dynamic learning
+          environment. Our mission is to provide an innovative and interactive
+          educational resources that cater to learners . Join us on this journey
+          to make learning fun and effective!
+        </p>
+      </section>
+    </footer>
+</div>
+<div id="chatbox-icon" onclick="toggleChatbox()">
+    <img src="llogo.png" alt="Chat Icon"> <!-- Replace with your icon -->
+</div>
+
+<!-- Full-Screen Chatbox Popup -->
+<div id="chatbox">
+    <div id="chatbox-header">
+        <span>Stressbuster Chatbox</span>
+        <button onclick="toggleChatbox()">X</button>
+    </div>
+    <div id="chatbox-content">
+        <button onclick="startBreathing()">Breathing Exercise</button>
+        <button onclick="startFocus()">Focusing Exercise</button>
+        <div id="activity" class="hidden"></div>
+        <div id="timer" class="hidden"></div>
+    </div>
+</div>
+
+<script>
+    let timerInterval;
+    let remainingTime;
+    let breathingSteps = [
+        "Inhale deeply...",
+        "Hold your breath...",
+        "Exhale slowly...",
+        "Pause before the next breath..."
+    ];
+    let currentStep = 0;
+
+    // Function to get URL query parameters
+function getQueryParam(param) {
+const urlParams = new URLSearchParams(window.location.search);
+return urlParams.get(param);
+}
+
+// Automatically start the exercise based on the `start` parameter
+document.addEventListener("DOMContentLoaded", () => {
+const startOption = getQueryParam('start');
+if (startOption === 'breathing') {
+    startBreathing();
+} else if (startOption === 'focusing') {
+    startFocus();
+}
+});
+
+
+    // Toggles the visibility of the chatbox
+    function toggleChatbox() {
+        const chatbox = document.getElementById('chatbox');
+        chatbox.style.display = chatbox.style.display === 'none' || !chatbox.style.display ? 'block' : 'none';
+        if (chatbox.style.display === 'none') clearInterval(timerInterval); // Stop timer if closed
+    }
+
+    // Starts the Breathing Exercise
+    function startBreathing() {
+        const activity = document.getElementById('activity');
+        activity.innerHTML = `<p id="breathing-step" style="font-size: 24px; font-weight: bold;">${breathingSteps[currentStep]}</p>
+                              <button onclick="closePopup()">Close</button>`;
+
+        activity.classList.remove('hidden');
+        startBreathingTimer(30);
+    }
+
+    function startBreathingTimer(duration) {
+        const timer = document.getElementById('timer');
+        timer.textContent = `Time left: ${duration} seconds`;
+        timer.classList.remove('hidden');
+        remainingTime = duration;
+
+        timerInterval = setInterval(() => {
+            remainingTime--;
+            timer.textContent = `Time left: ${remainingTime} seconds`;
+
+            // Update breathing steps every few seconds
+            if (remainingTime % 7 === 0 && remainingTime > 0) {
+                currentStep = (currentStep + 1) % breathingSteps.length;
+                document.getElementById('breathing-step').textContent = breathingSteps[currentStep];
+            }
+
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                timer.textContent = "Breathing exercise completed!";
+            }
+        }, 1000);
+    }
+
+    // Starts the Focusing Exercise
+    function startFocus() {
+        const activity = document.getElementById('activity');
+        activity.innerHTML = `
+            <img src="dot.jpg" alt="Focus Dot" style="width:80px; height:80px;">
+            <p>Keep staring at the dot to increase your concentration.</p>
+            <button onclick="closePopup()">Close</button>
+        `;
+        activity.classList.remove('hidden');
+        startTimer(30, "Focusing exercise completed!");
+    }
+
+    // Starts a countdown timer for the Focusing Exercise
+    function startTimer(duration, completionMessage) {
+        clearInterval(timerInterval);
+        remainingTime = duration;
+
+        const timer = document.getElementById('timer');
+        timer.textContent = `Time left: ${remainingTime} seconds`;
+        timer.classList.remove('hidden');
+
+        timerInterval = setInterval(() => {
+            remainingTime--;
+            timer.textContent = `Time left: ${remainingTime} seconds`;
+
+            if (remainingTime <= 0) {
+                clearInterval(timerInterval);
+                timer.textContent = completionMessage;
+            }
+        }, 1000);
+    }
+
+    // Closes the popup and resets the activity
+    function closePopup() {
+        const activity = document.getElementById('activity');
+        const timer = document.getElementById('timer');
+        activity.classList.add('hidden');
+        timer.classList.add('hidden');
+        clearInterval(timerInterval);
+    }
+</script>
+
+  </body>
+  </html>

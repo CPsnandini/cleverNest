@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #d0e7fc, #d7f6d7, #fdf0d4);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            line-height: 0.9
+        }
+        .image
+        {
+            height: 30px;
+            width: 60px;
+        }
+
+        nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+header {
+  background-color: #f8bbd0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+nav ul li a:hover {
+  background-color: #333;
+}
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        /* Feedback Form Styling */
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: calc(100% - 20px);
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+        }
+
+        textarea {
+            resize: none; /* Disable resizing */
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #28a745;
+            background-color: #fff;
+        }
+
+        #char-count {
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Feedback List Styling */
+        #feedback-list {
+            display: none; /* Hidden by default */
+            max-width: 600px;
+            margin: 30px auto 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #feedback-list li {
+            background: #fff;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            line-height: 1.5;
+        }
+
+        #feedback-list li span {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="image.png" alt="CleverNest Logo" />
+            <h1>CLEVER NEST</h1>
+          </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="course.html">Practice</a></li>
+        <li><a href="badge.html">Badges</a></li>
+      </ul>
+    </nav>
+  </header>
+    <h1>Feedback Form</h1>
+    <form id="feedback-form">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your name" required>
+
+        <label for="feedback">Feedback (max 200 characters):</label>
+        <textarea id="feedback" name="feedback" rows="5" maxlength="200" placeholder="Write your feedback here..." required></textarea>
+        <div id="char-count">200 characters remaining</div>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <!-- Feedback List (Hidden by Default) -->
+    <ul id="feedback-list"></ul>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const feedbackForm = document.getElementById("feedback-form");
+            const feedbackTextarea = document.getElementById("feedback");
+            const charCount = document.getElementById("char-count");
+            const feedbackList = document.getElementById("feedback-list");
+
+            // Update character count
+            feedbackTextarea.addEventListener("input", () => {
+                const remaining = 200 - feedbackTextarea.value.length;
+                charCount.textContent = `${remaining} characters remaining`;
+            });
+
+            // Handle form submission
+            feedbackForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const username = document.getElementById("username").value.trim();
+                const feedbackText = feedbackTextarea.value.trim();
+
+                if (username && feedbackText) {
+                    // Send feedback to the backend server
+                    fetch('http://localhost:3000/submit-feedback', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, feedback: feedbackText }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Feedback submitted successfully!");
+
+                            // Display feedback in the list
+                            const feedbackItem = document.createElement("li");
+                            feedbackItem.innerHTML = `<span>${username}</span><p>${feedbackText}</p>`;
+                            feedbackList.appendChild(feedbackItem);
+                            feedbackList.style.display = "block"; // Show the feedback list
+
+                            // Reset form and character count
+                            feedbackForm.reset();
+                            charCount.textContent = "200 characters remaining";
+                        } else {
+                            alert("Error submitting feedback.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("An error occurred while submitting feedback.");
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

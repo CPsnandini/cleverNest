@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quick Quiz</title>
+    <style>
+      :root {
+        background: linear-gradient(135deg, #ff9a8b, #f7ffb8);
+        font-size: 62.5%;
+      }
+
+      * {
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 5.4rem;
+        color: #333;
+        margin-bottom: 5rem;
+      }
+
+      h1 > span {
+        font-size: 2.4rem;
+        font-weight: 500;
+      }
+
+      h2 {
+        font-size: 4.2rem;
+        margin-bottom: 4rem;
+        font-weight: 700;
+      }
+
+      h3 {
+        font-size: 2.8rem;
+        font-weight: 500;
+      }
+
+      /* UTILITIES */
+
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: linear-gradient(135deg, #ff9a8b, #f7ffb8);
+      }
+
+      .container > * {
+        width: 100%;
+      }
+
+      .flex-column {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .flex-center {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .justify-center {
+        justify-content: center;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* BUTTONS */
+      .btn {
+        font-size: 1.8rem;
+        padding: 1rem 0;
+        width: 20rem;
+        text-align: center;
+        border: 0.1rem solid #333;
+        margin-bottom: 1rem;
+        text-decoration: none;
+        color: #333;
+        background-color: white;
+        border-radius: 0.5rem;
+        transition: all 150ms ease-in-out;
+      }
+
+      .btn:hover {
+        cursor: pointer;
+        background-color: orange; /* Change background color to a coral shade */
+        color: white; /* Change text color to white */
+        box-shadow: 0 0.6rem 2rem 0 rgba(255, 87, 34, 0.7); /* Darker coral shadow */
+        transform: translateY(-0.1rem); /* Slightly lift the button */
+        transition: all 150ms ease-in-out;
+      }
+
+      .btn[disabled]:hover {
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+
+      /* QUIZ SECTIONS */
+      .quiz-section {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+        background-color: linear-gradient(135deg, #ff9a8b, #f7ffb8);
+        box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+        border-radius: 0.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .quiz-section h2 {
+        font-size: 3.5rem;
+        color: #333;
+        margin-bottom: 2rem;
+      }
+
+      .quiz-section p {
+        font-size: 2rem;
+        color: #555;
+        margin-bottom: 3rem;
+      }
+
+      .quiz-section a {
+        font-size: 1.8rem;
+        padding: 1rem 2rem;
+        margin: 0.5rem;
+        border: 0.1rem solid #333;
+        color: #333;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        background-color: white;
+        transition: all 150ms ease-in-out;
+      }
+
+      .quiz-section a:hover {
+        background-color: orange;
+        color: white;
+        box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 87, 34, 0.7);
+      }
+
+      .quiz-section a[disabled]:hover {
+        background-color: #f0f0f0;
+        color: #aaa;
+      }
+
+      /* HEADER STYLES */
+      h2.intro-message {
+        font-size: 2.5rem;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        color: #333;
+      }
+
+      /* FORMS */
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input {
+        margin-bottom: 1rem;
+        width: 20rem;
+        padding: 1.5rem;
+        font-size: 1.8rem;
+        border: none;
+        box-shadow: 0 0.1rem 1.4rem 0 rgba(27, 43, 51, 0.5);
+        border-radius: 0.5rem;
+      }
+
+      input::placeholder {
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="home" class="flex-center flex-column">
+        <!-- Title and Main Message -->
+        <h1>Quick Quiz</h1>
+        <h2 class="intro-message">Want to check how much you have learnt?</h2>
+    
+        <!-- Buttons to show each quiz section -->
+        <button class="btn" onclick="showQuiz('linearAlgebra')">Linear Algebra</button>
+        <button class="btn" onclick="showQuiz('coordinateGeometry')">Coordinate Geometry</button>
+        <button class="btn" onclick="showQuiz('expansions')">Expansions</button>
+        <button class="btn" onclick="showQuiz('transforms')">Transforms</button>
+        <button class="btn" onclick="showQuiz('numericalApproximation')">Numerical Approximation</button>
+        <button class="btn" onclick="showQuiz('permutations')">Permutations</button>
+        <button class="btn" onclick="showQuiz('critical')">critical thinking</button>
+    
+        <!-- Quiz Sections, initially hidden -->
+        <div id="linearAlgebra" class="quiz-section">
+          <h2>Quick Linear Algebra Quiz</h2>
+          <p>Test your skills in linear algebra!</p>
+          <a class="btn" href="/game.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+    
+        <div id="coordinateGeometry" class="quiz-section">
+          <h2>Quick Coordinate Geometry Quiz</h2>
+          <p>Test your skills in coordinate geometry!</p>
+          <a class="btn" href="/co.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+    
+        <div id="expansions" class="quiz-section">
+          <h2>Quick Expansions Quiz</h2>
+          <p>Check your skills in expansions!</p>
+          <a class="btn" href="/exp.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+    
+        <div id="transforms" class="quiz-section">
+          <h2>Quick Transforms Quiz</h2>
+          <p>Test your skills in transformations!</p>
+          <a class="btn" href="/tr.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+    
+        <div id="numericalApproximation" class="quiz-section">
+          <h2>Quick Numerical Approximation Quiz</h2>
+          <p>Test your skills in different numerical approximations!</p>
+          <a class="btn" href="/na.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+    
+        <div id="permutations" class="quiz-section">
+          <h2>Quick Permutations Quiz</h2>
+          <p>Test your skills in permutations and combinations!</p>
+          <a class="btn" href="per.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+
+        <div id="critical" class="quiz-section">
+          <h2>Quick critical thinking Quiz</h2>
+          <p>Test your skills in critical thinking!</p>
+          <a class="btn" href="/critical.html">Start Quiz</a>
+          <a class="btn" href="/highscores.html">High Scores</a>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // Function to show the selected quiz and hide the others
+      function showQuiz(quizType) {
+        // Hide all quiz sections
+        const quizSections = document.querySelectorAll('.quiz-section');
+        quizSections.forEach((section) => {
+          section.style.display = 'none';
+        });
+
+        // Show the selected quiz section
+        document.getElementById(quizType).style.display = 'block';
+      }
+    </script>
+  </body>
+</html>

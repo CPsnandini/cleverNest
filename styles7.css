@@ -1,0 +1,114 @@
+body {
+  font-family: "Fredoka One", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(to right, #d0e7fc, #d7f6d7, #fdf0d4);
+  color: #333;
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #0056b3;
+}
+
+#game-container {
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#game-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 120px;
+  height: 120px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.options-grid {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.shape {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+/* Shapes */
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid blue;
+}
+
+.square {
+  width: 30px;
+  height: 30px;
+  background: red;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: green;
+}
+
+#result-message {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #444;
+}
+
+#reset-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#reset-button {
+  background: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#reset-button:hover {
+  background: #e64a19;
+}

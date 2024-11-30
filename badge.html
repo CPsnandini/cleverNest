@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Badge System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #d0e7fc, #d7f6d7, #fdf0d4);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+            
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 80px;
+        }
+
+        .badge {
+            width: 120px;
+            height: 140px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+          
+            border-radius: 10px;
+            background: rgb(248, 246, 246);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .badge.gold {
+            border: 3px solid #ffd700;
+        }
+
+        .badge.silver {
+            border: 3px solid #c0c0c0;
+        }
+
+        .badge.bronze {
+            border: 3px solid #cd7f32;
+        }
+
+        .badge-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .badge-description {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .input-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .input-section input {
+            padding: 5px;
+            font-size: 16px;
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        .input-section button {
+            padding: 5px 10px;
+            font-size: 16px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .input-section button:hover {
+            background: #45a049;
+           
+        }
+
+        .badge-result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .achievements-section {
+            margin-top: 20px;
+        }
+
+        .achievements-section button {
+    padding: 5px 10px;
+    font-size: 16px;
+    color: rgb(5, 5, 5);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.achievements-section button:hover {
+    background: linear-gradient(to right, #bedaf4, #c5ecc5, #f1e2c2);
+    border: 2px solid #007BFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.achievements-list {
+    margin-top: 10px;
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow wrapping to next row */
+    justify-content:flex-start; /* Center-align the items */
+    gap: 30px; /* Add space between items */
+    list-style: none;
+    padding: 0;
+}
+
+.achievements-list li {
+    padding: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100px; /* Set a fixed width for items */
+    text-align:start; /* Center-align content within items */
+}
+
+
+        /* Showering animation for emojis and words */
+        @keyframes showeringAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .emoji, .badge-word {
+            font-size: 2rem;
+            animation: showeringAnimation 2s ease-in-out forwards;
+        }
+
+        .emoji-delay {
+            animation-delay: 0.5s;
+        }
+
+        .emoji-2 {
+            animation-delay: 1s;
+        }
+
+        .emoji-3 {
+            animation-delay: 1.5s;
+        }
+
+        .badge-word {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            animation: showeringAnimation 2s ease-in-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <h1>Badge System</h1>
+
+    <div class="input-section">
+        <input type="number" id="marksInput" placeholder="Enter your marks (0-100)">
+        <button onclick="checkBadge()">Check Badge</button>
+    </div>
+
+    <div class="badge-result" id="badgeResult"></div>
+
+    
+
+    <div class="badge-container">
+        <div class="badge gold">
+            <img src="gold2.jpg" alt="Gold Badge">
+            <div class="badge-name">Gold</div>
+            <div class="badge-description">Outstanding performance!</div>
+        </div>
+        <div class="badge silver">
+            <img src="silver2.jpg" alt="Silver Badge">
+            <div class="badge-name">Silver</div>
+            <div class="badge-description">Great effort!</div>
+        </div>
+        <div class="badge bronze">
+            <img src="bronze2.jpg" alt="Bronze Badge">
+            <div class="badge-name">Bronze</div>
+            <div class="badge-description">Good effort!</div>
+        </div>
+    </div>
+
+
+    <div class="achievements-section">
+        <button onclick="viewAchievements()">View Previous Achievements</button>
+        <ul class="achievements-list" id="achievementsList"></ul>
+    </div>
+    <script>
+        // Function to check the badge based on marks
+        function checkBadge() {
+            const marks = parseInt(document.getElementById('marksInput').value);
+            const resultDiv = document.getElementById('badgeResult');
+            const badgeContainer = document.querySelector('.badge-container');
+            const achievements = JSON.parse(localStorage.getItem('achievements')) || [];
+
+            if (isNaN(marks) || marks < 0 || marks > 100) {
+                resultDiv.textContent = 'Please enter valid marks (0-100).';
+                resultDiv.style.color = 'red';
+                return;
+            }
+
+            let earnedBadge = "";
+            let badgeWord = "";  // Word to accompany the badge
+            let emojis = "";
+
+            if (marks >= 90) {
+                resultDiv.textContent = '🎉 Congratulations! You earned the Gold Badge!';
+                resultDiv.style.color = '#ffd700';
+                earnedBadge = 'gold';
+                badgeWord = "Amazing";
+                emojis = `<span class="emoji emoji-1">🎉</span>`;
+            } else if (marks >= 75) {
+                resultDiv.textContent = '👏 Great job! You earned the Silver Badge!';
+                resultDiv.style.color = '#c0c0c0';
+                earnedBadge = 'silver';
+                badgeWord = "Excellent";
+                emojis = `<span class="emoji emoji-2">👏</span>`;
+            } else if (marks >= 50) {
+                resultDiv.textContent = '✨ Good effort! You earned the Bronze Badge!';
+                resultDiv.style.color = '#cd7f32';
+                earnedBadge = 'bronze';
+                badgeWord = "Good";
+                emojis = `<span class="emoji emoji-3">✨</span>`;
+            } else {
+                resultDiv.textContent = 'Keep trying! No badge earned yet.';
+                return;
+            }
+
+            // Save to localStorage
+            achievements.push(`${badgeWord} (${earnedBadge} Badge)`);
+            localStorage.setItem('achievements', JSON.stringify(achievements));
+
+            resultDiv.innerHTML += `<br><span class="badge-word">${badgeWord}!</span>`;
+            resultDiv.innerHTML += emojis;
+
+            const badges = document.querySelectorAll('.badge');
+            badges.forEach(badge => {
+                if (!badge.classList.contains(earnedBadge)) {
+                    badgeContainer.removeChild(badge);
+                }
+            });
+        }
+// Function to view achievements
+function viewAchievements() {
+            const achievementsList = document.getElementById('achievementsList');
+            
+            // Toggle visibility
+            if (achievementsList.style.display === 'none' || achievementsList.style.display === '') {
+                achievementsList.innerHTML = ''; // Clear the list
+                const achievements = JSON.parse(localStorage.getItem('achievements')) || [];
+
+                if (achievements.length === 0) {
+                    achievementsList.innerHTML = '<li>No achievements yet!</li>';
+                } else {
+                    achievements.forEach(achievement => {
+                        const li = document.createElement('li');
+                        const img = document.createElement('img');
+                        img.src = achievement.logo; // Set the image source to the logo URL
+                        img.alt = achievement.name; // Use the achievement name as alt text
+                        img.style.width = '50px'; // Set image width (adjust as needed)
+                        img.style.height = '50px'; // Set image height (adjust as needed)
+                        li.appendChild(img);
+                        li.appendChild(document.createTextNode(` ${achievement.name}`));
+                        achievementsList.appendChild(li);
+                    });
+                }
+                achievementsList.style.display = 'block'; // Show the list
+            } else {
+                achievementsList.style.display = 'none'; // Hide the list
+            }
+        }
+
+        // Example to add achievements with logos to localStorage
+        const exampleAchievements = [
+            { name: 'First Badge', logo: 'gold2.png' },
+            { name: 'Top Performer', logo: 'silver2.png' },
+            { name: 'good performance', logo: 'bronze2.png' }
+
+        ];
+        localStorage.setItem('achievements', JSON.stringify(exampleAchievements));
+
+    </script>
+</body>
+</html>

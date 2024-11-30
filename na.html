@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Quick Quiz - Play</title>
+   <style>
+
+
+:root {
+  background: linear-gradient(135deg, #ff9a8b, #f7ffb8);
+
+font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 5.4rem;
+  color: #333;
+  margin-bottom: 5rem;
+}
+
+h1 > span {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 4.2rem;
+  margin-bottom: 4rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2.8rem;
+  font-weight: 500;
+}
+
+/* UTILITIES */
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: linear-gradient(135deg, #ff9a8b, #f7ffb8);
+}
+
+.container > * {
+  width: 100%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+/* BUTTONS */
+.btn {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+  width: 20rem;
+  text-align: center;
+  border: 0.1rem solid #333;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: #333;
+  background-color: white;
+  border-radius: 0.5rem;
+  transition: all 150ms ease-in-out;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: orange; /* Change background color to a coral shade */
+  color: white; /* Change text color to white */
+  box-shadow: 0 0.6rem 2rem 0 rgba(255, 87, 34, 0.7); /* Darker coral shadow */
+  transform: translateY(-0.1rem); /* Slightly lift the button */
+  transition: all 150ms ease-in-out;
+}
+
+
+
+
+.btn[disabled]:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* QUIZ SECTIONS */
+.quiz-section {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  background-color: linear-gradient(135deg, #ff9a8b, #f7ffb8);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.quiz-section h2 {
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.quiz-section p {
+  font-size: 2rem;
+  color: #555;
+  margin-bottom: 3rem;
+}
+
+.quiz-section a {
+  font-size: 1.8rem;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border: 0.1rem solid #333;
+  color: #333;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  background-color: white;
+  transition: all 150ms ease-in-out;
+}
+
+.quiz-section a:hover {
+  background-color: orange;
+  color: white;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 87, 34, 0.7);
+}
+
+.quiz-section a[disabled]:hover {
+  background-color: #f0f0f0;
+  color: #aaa;
+}
+
+/* HEADER STYLES */
+h2.intro-message {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* FORMS */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 1rem;
+  width: 20rem;
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  border: none;
+  box-shadow: 0 0.1rem 1.4rem 0 rgba(27, 43, 51, 0.5);
+  border-radius: 0.5rem;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+
+
+    .choice-container {
+  display: flex;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: 0.1rem solid rgb(86, 165, 235, 0.25);
+  background-color: white;
+}
+
+.choice-container:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(7, 27, 37, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.choice-prefix {
+  padding: 1.5rem 2.5rem;
+  background-color: #333;
+  color: white;
+}
+
+.choice-text {
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.correct {
+  background-color: #5bc774;
+}
+
+.incorrect {
+  background-color: #dc3545;
+}
+
+/* HUD */
+
+#hud {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud-prefix {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.hud-main-text {
+  text-align: center;
+}
+
+#progressBar {
+  width: 20rem;
+  height: 4rem;
+  border: 0.3rem solid #333;
+  margin-top: 1.5rem;
+}
+
+#progressBarFull {
+  height: 3.4rem;
+  background-color: #333;
+  width: 0%;
+}
+   </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="game" class="justify-center flex-column">
+        <div id="hud">
+          <div id="hud-item">
+            <p id="progressText" class="hud-prefix">
+              Question
+            </p>
+            <div id="progressBar">
+              <div id="progressBarFull"></div>
+            </div>
+          </div>
+          <div id="hud-item">
+            <p class="hud-prefix">
+              Score
+            </p>
+            <h1 class="hud-main-text" id="score">
+              0
+            </h1>
+          </div>
+        </div>
+        <h2 id="question">What is the answer to this questions?</h2>
+        <div class="choice-container">
+          <p class="choice-prefix">A</p>
+          <p class="choice-text" data-number="1">Choice 1</p>
+        </div>
+        <div class="choice-container">
+          <p class="choice-prefix">B</p>
+          <p class="choice-text" data-number="2">Choice 2</p>
+        </div>
+        <div class="choice-container">
+          <p class="choice-prefix">C</p>
+          <p class="choice-text" data-number="3">Choice 3</p>
+        </div>
+        <div class="choice-container">
+          <p class="choice-prefix">D</p>
+          <p class="choice-text" data-number="4">Choice 4</p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const question = document.getElementById("question");
+const choices = Array.from(document.getElementsByClassName("choice-text"));
+const progressText = document.getElementById("progressText");
+const scoreText = document.getElementById("score");
+const progressBarFull = document.getElementById("progressBarFull");
+let currentQuestion = {};
+let acceptingAnswers = false;
+let score = 0;
+let questionCounter = 0;
+let availableQuesions = [];
+
+let questions = [
+  {
+    question: "What is the approximation of sqrt(2) up to two decimal places?",
+    choice1: "1.41",
+    choice2: "1.42",
+    choice3: "1.44",
+    choice4: "1.43",
+    answer: 1
+  },
+  {
+    question: "Which method is used for finding roots of nonlinear equations?",
+    choice1: "Bisection method",
+    choice2: "Linear interpolation",
+    choice3: "Trapezoidal rule",
+    choice4: "Euler's method",
+    answer: 1
+  },
+  {
+    question: "What is the approximation of 1/3 using the first three terms of its Taylor series?",
+    choice1: "0.3333",
+    choice2: "0.3332",
+    choice3: "0.3334",
+    choice4: "0.3328",
+    answer: 1
+  },
+  {
+    question: "Which method is used to estimate the area under a curve?",
+    choice1: "Simpson's rule",
+    choice2: "Newton's method",
+    choice3: "Gauss-Seidel method",
+    choice4: "Runge-Kutta method",
+    answer: 1
+  },
+  {
+    question: "What is the approximation of pi using the Monte Carlo method?",
+    choice1: "3.1415",
+    choice2: "3.14",
+    choice3: "3.142",
+    choice4: "3.13",
+    answer: 1
+  }
+];
+
+
+//CONSTANTS
+const CORRECT_BONUS = 10;
+const MAX_QUESTIONS = 3;
+
+startGame = () => {
+  questionCounter = 0;
+  score = 0;
+  availableQuesions = [...questions];
+  getNewQuestion();
+};
+
+getNewQuestion = () => {
+  if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+    localStorage.setItem("mostRecentScore", score);
+    //go to the end page
+    return window.location.assign("/end.html");
+  }
+  questionCounter++;
+  progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
+  //Update the progress bar
+  progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+
+  const questionIndex = Math.floor(Math.random() * availableQuesions.length);
+  currentQuestion = availableQuesions[questionIndex];
+  question.innerText = currentQuestion.question;
+
+  choices.forEach(choice => {
+    const number = choice.dataset["number"];
+    choice.innerText = currentQuestion["choice" + number];
+  });
+
+  availableQuesions.splice(questionIndex, 1);
+  acceptingAnswers = true;
+};
+
+choices.forEach(choice => {
+  choice.addEventListener("click", e => {
+    if (!acceptingAnswers) return;
+
+    acceptingAnswers = false;
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset["number"];
+
+    const classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+    if (classToApply === "correct") {
+      incrementScore(CORRECT_BONUS);
+    }
+
+    selectedChoice.parentElement.classList.add(classToApply);
+
+    setTimeout(() => {
+      selectedChoice.parentElement.classList.remove(classToApply);
+      getNewQuestion();
+    }, 1000);
+  });
+});
+
+incrementScore = num => {
+  score += num;
+  scoreText.innerText = score;
+};
+
+startGame();
+    </script>
+  </body>
+</html>

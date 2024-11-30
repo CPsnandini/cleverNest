@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattern Matching Game</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles7.css" />
+  </head>
+  <body>
+    <h1>MATCH THE PATTERN!</h1>
+    <div id="game-container">
+      <div id="header">
+        <div>Level: <span id="level">1</span></div>
+        <div>Score: <span id="score">0</span></div>
+        <div>Time: <span id="time">30</span>s</div>
+      </div>
+      <div id="game-grid">
+        <!-- Central pattern card -->
+        <div id="pattern-card" class="card"></div>
+
+        <!-- Surrounding option cards -->
+        <div id="option-cards" class="options-grid"></div>
+      </div>
+    </div>
+
+    <!-- Result Message Container -->
+    <div id="result-message"></div>
+
+    <!-- Reset Button -->
+    <div id="reset-container">
+      <button id="reset-button">Reset</button>
+    </div>
+
+    <script src="script4.js"></script>
+  </body>
+</html>
